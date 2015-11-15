@@ -17,16 +17,13 @@ limitations under the License.
 function Request-IBAvailableIP {
     <#
     .SYNOPSIS
-        Retrieves resource records from a Infoblox Gridserver
+        Reservers an available IP from a Infoblox Gridserver
 
     .DESCRIPTION
         Specify an attribute to search for, for example hostname and retrieve the object from the Gridserver
 
     .EXAMPLE
-        Get-IBResourceRecord -Type host -SearchField MyServer -GridServer myinfoblox.mydomain.com -Credential $Credential
-
-    .EXAMPLE
-        Get-IBResourceRecord -Type network -SearchField 1.0.0.0/8 -GridServer myinfoblox.mydomain.com -Credential $Credential -Passthrough
+        Request-IBAvailableIP -GridServer myinfoblox.mydomain.com -Credential $Credential -Network '1.2.3.0/24' -Name 'server01' -Comment 'test server'
 
     .PARAMETER GridServer
         The name of the infoblox appliance.
