@@ -41,20 +41,21 @@ function Get-IBNextAvailableIP {
         The quantity of available IP addresses to get.
     #>
     param(
-        [Parameter(Mandatory)]
-        [string]$GridServer,
+        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [string]$GridServer = (Read-Host -Prompt 'InfoBlox Grid server'),
 
         [Parameter(Mandatory)]
-        [string]$NetworkRef,
+        [string]$NetworkRef = (Read-Host -Prompt 'Network object reference'),
 
-        [Parameter(Mandatory)]
-        [pscredential]$Credential,
+        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [pscredential]$Credential = (Get-Credential -Message 'InfoBlox credential'),
 
         [int]$Quantity = 1
     )
 
     begin {
-        $uri = "https://$GridServer/wapi/v$script:apiVersion/$NetworkRef`?_function=next_available_ip&num=$Quantity"
+        $apiVersion = $script:apiVersion
+        $uri = "https://$GridServer/wapi/v$apiVersion/$NetworkRef`?_function=next_available_ip&num=$Quantity"
     }
 
     process {

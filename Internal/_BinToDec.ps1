@@ -17,7 +17,7 @@ limitations under the License.
 function _BinToDec {
     param(
         [parameter(Mandatory)]
-        [string]$binary
+        [string]$binary = (Read-Host -Prompt 'Binary string')
     )
      
     $i = 0

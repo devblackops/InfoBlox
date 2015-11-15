@@ -43,29 +43,31 @@ function Set-IBResourceRecord {
     .PARAMETER Credential
         The credential to authenticate to the grid server with.
     #>
-    [CmdletBinding()]
+    [cmdletbinding(SupportsShouldProcess = $true)]
     param(
         [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
         [Alias('_ref')]
-        [string]$Reference,
+        [string]$Reference = (Read-Host -Prompt 'Network reference'),
 
         [Parameter(Mandatory)]
-        [string]$IPv4Address,
+        [string]$IPv4Address = (Read-Host -Prompt 'IP4 address'),
 
         [Parameter(Mandatory)]
-        [string]$HostName,
+        [string]$HostName = (Read-Host -Prompt 'Hostname'),
 
         [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
-        [string]$GridServer,
+        [string]$GridServer = (Read-Host -Prompt 'InfoBlox Grid server'),
 
         [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
-        [psversion]$Credential
+        [pscredential]$Credential = (Get-Credential -Message 'InfoBlox credential')
     )
 
-    begin {}
+    begin {
+        $apiVersion = $script:apiVersion
+    }
 
     process {
-        $uri = "https://$GridServer/wapi/v$script:apiVersion/$Reference"
+        $uri = "https://$GridServer/wapi/v$apiVersion/$Reference"
 
         $data = @{
             ipv4addrs = @(
@@ -74,8 +76,10 @@ function Set-IBResourceRecord {
         }
         $json = $data | ConvertTo-Json
 
-        $result = Invoke-RestMethod -Uri $uri -Method Put -Body $json -ContentType 'application/json' -Credential $Credential
-        return $result
+        if ($PSCmdlet.ShouldProcess($Reference, 'Edit InfoBlox resource record')) {
+            $result = Invoke-RestMethod -Uri $uri -Method Put -Body $json -ContentType 'application/json' -Credential $Credential
+            return $result
+        }
     }
 
     end {}

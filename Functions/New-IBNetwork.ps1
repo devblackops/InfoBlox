@@ -36,24 +36,24 @@ function New-IBNetwork {
 
     .PARAMETER Comment
         The description/comment to add
-    #>
-    [cmdletbinding()]
+    #>    
+    [cmdletbinding(SupportsShouldProcess = $true)]
     param(
-        [Parameter(Mandatory)]
-        [string]$GridServer,
+        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [string]$GridServer = (Read-Host -Prompt 'InfoBlox Grid server'),
+
+        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [pscredential]$Credential = (Get-Credential -Message 'InfoBlox credential'),
 
         [Parameter(Mandatory)]
-        [pscredential]$Credential,
+        [string]$Network = (Read-Host -Prompt 'Network'),
 
-        [Parameter(Mandatory)]
-        [string]$Network,
-
-        [Parameter(Mandatory)]
-        [string]$Comment
+        [string]$Comment = [string]::Empty
     )
 
     begin {
-        $uri = "https://$GridServer/wapi/v$script:apiVersion/network"
+        $apiVersion = $script:apiVersion
+        $uri = "https://$GridServer/wapi/v$apiVersion/network"
     }
 
     process {
@@ -64,9 +64,10 @@ function New-IBNetwork {
 
         $json = $data | ConvertTo-Json
 
-        $request = Invoke-RestMethod -Uri $uri -Method Post -Credential $Credential -ContentType 'application/json' -Body $json
-
-        return $request
+        if ($PSCmdlet.ShouldProcess($Network, 'Create InfoBlox network')) {
+            $request = Invoke-RestMethod -Uri $uri -Method Post -Credential $Credential -ContentType 'application/json' -Body $json
+            return $request
+        }
     }
 
     end {}

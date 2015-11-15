@@ -34,25 +34,30 @@ function Remove-IBResourceRecord {
     .PARAMETER Credential
         The credential to authenticate to the grid server with.
     #>
-    [CmdletBinding()]
+    [cmdletbinding(SupportsShouldProcess = $true)]
     param(
         [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
         [Alias('_ref')]
-        [string]$Reference,
+        [string]$Reference = (Read-Host -Prompt 'Network reference'),
 
         [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
-        [string]$GridServer,
+        [string]$GridServer = (Read-Host -Prompt 'InfoBlox Grid server'),
 
         [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
-        [pscredential]$Credential
+        [pscredential]$Credential = (Get-Credential -Message 'InfoBlox credential')
     )
 
-    begin {}
+    begin {
+        $apiVersion = $script:apiVersion
+    }
 
     process {
-        $uri = "https://$GridServer/wapi/v$script:apiVersion/$Reference"
+        $uri = "https://$GridServer/wapi/v$apiVersion/$Reference"
 
-        $request = Invoke-RestMethod -Uri $uri -Method Delete -Credential $Credential
+        if ($PSCmdlet.ShouldProcess($Reference, 'Remove InfoBlox record')) {
+            $request = Invoke-RestMethod -Uri $uri -Method Delete -Credential $Credential
+            return $request
+        }
     }
 
     end {}

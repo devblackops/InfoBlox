@@ -2,12 +2,10 @@ TOPIC
     about_InfoBlox
 
 SHORT DESCRIPTION
-    PowerShell module for interacting with InfoBlox IPAM via
-	the REST API.
+    PowerShell module for interacting with InfoBlox IPAM via the REST API.
 
 LONG DESCRIPTION
-    PowerShell module for interacting with InfoBlox IPAM via
-	the REST API.
+    PowerShell module for interacting with InfoBlox IPAM via the REST API.
 
 EXAMPLES
 	- Add-IBResourceRecordHost

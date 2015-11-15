@@ -46,28 +46,31 @@ function Request-IBAvailableIP {
     .PARAMETER ConfigureForDNS
         Switch to indicate whether to create a DNS record as well. Default is FALSE.
     #>
+    [cmdletbinding(SupportsShouldProcess = $true)]
     param(
-        [Parameter(Mandatory)]
-        [string]$GridServer,
+        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [string]$GridServer = (Read-Host -Prompt 'InfoBlox Grid server'),
+
+        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [pscredential]$Credential = (Get-Credential -Message 'InfoBlox credential'),
 
         [Parameter(Mandatory)]
-        [pscredential]$Credential,
+        [string]$Network = (Read-Host -Prompt 'Network'),
 
         [Parameter(Mandatory)]
-        [string]$Network,
+        [string]$Name = (Read-Host -Prompt 'Hostname'),
 
-        [Parameter(Mandatory)]
-        [string]$Name,
-
-        [string]$Comment = '',
+        [string]$Comment = [string]::Empty,
 
         [switch]$ConfigureForDNS
     )
 
-    begin {}
+    begin {
+        $apiVersion = $script:apiVersion
+    }
 
     process {
-        Write-Debug "Searching for host record [$Name]"
+        Write-Debug -Message "Searching for host record [$Name]"
 
         $match = Get-IBResourceRecord -Type Host -SearchText $Name -GridServer $GridServer -Credential $Credential
         if ($match) {
@@ -81,16 +84,16 @@ function Request-IBAvailableIP {
         }
 
         if ($exist -eq $false) {
-            Write-Debug "Host [$Name] not found. Continuing..."
+            Write-Debug -Message "Host [$Name] not found. Continuing..."
             $net = Get-IBNetwork -GridServer $GridServer -Credential $Credential -Network $Network
 
-            if ($net -ne $null) {
-                write-verbose "Found network [$($Net._ref)]"
+            if ($null -ne $net) {
+                Write-Verbose -Message "Found network [$($Net._ref)]"
 
-                write-verbose 'Searching for next available IP:'
+                Write-Verbose -Message 'Searching for next available IP:'
                 $availableIP = Get-IBNextAvailableIP -GridServer $GridServer -Credential $Credential -NetworkRef $net._ref -Quantity 1
 
-                if ($availableIP -ne $null) {
+                if ($null -ne $availableIP) {
                     $params = @{
                         GridServer = $GridServer
                         Credential = $Credential
@@ -101,14 +104,16 @@ function Request-IBAvailableIP {
                     if ($PSBoundParameters.ContainsKey('ConfigureForDNS')) {
                         $params.CreateInDNS = $true
                     }
-                    $hostRef = Add-IBResourceRecordHost @params
 
-                    if ($hostRef -ne $null) {
-                        $uri = "https://$GridServer/wapi/v$script:apiVersion/$hostRef"
-                        $result = Invoke-RestMethod -Uri $uri -Credential $Credential
-                        return $result.ipv4addrs
-                    } else {
-                        Write-Error -Message "Failed to allocate host record for IP [$availableIP]"
+                    if ($PSCmdlet.ShouldProcess($Network, 'Request InfoBlox available IP')) {
+                        $hostRef = Add-IBResourceRecordHost @params
+                        if ($null -ne $hostRef) {
+                            $uri = "https://$GridServer/wapi/v$apiVersion/$hostRef"
+                            $result = Invoke-RestMethod -Uri $uri -Credential $Credential
+                            return $result.ipv4addrs
+                        } else {
+                            Write-Error -Message "Failed to allocate host record for IP [$availableIP]"
+                        }
                     }
                 } else {
                     Write-Error -Message "There are no available IPs on network [$Network]"

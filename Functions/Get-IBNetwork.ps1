@@ -37,17 +37,19 @@ function Get-IBNetwork {
     .PARAMETER Properties
         Additional properties to retrieve with the network object.
     #>
+    
+    [OutputType([system.object[]])]
     [cmdletbinding()]
     param(
-        [Parameter(Mandatory)]
-        [string]$GridServer,
+        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [string]$GridServer = (Read-Host -Prompt 'InfoBlox Grid server'),
 
-        [Parameter(Mandatory)]
-        [pscredential]$Credential,
+        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [pscredential]$Credential = (Get-Credential -Message 'InfoBlox credential'),
 
         [string]$Network = '*',
 
-        [string[]]$Properties
+        [string[]]$Properties = [string[]]
     )
 
     begin {
@@ -56,10 +58,10 @@ function Get-IBNetwork {
     }
 
     process {
-        $matches = (Invoke-restmethod -Uri $uri -Method Get -Credential $Credential -ContentType 'application/json') | where Network -Like $Network
+        $matches = (Invoke-restmethod -Uri $uri -Method Get -Credential $Credential -ContentType 'application/json') | Where-Object Network -Like $Network
 
         $result = @()
-        $matches | foreach {
+        $matches | ForEach-Object {
             $x = Invoke-RestMethod -Uri "https://$GridServer/wapi/v$apiVersion/network?network=$($_.network)&_return_fields=extensible_attributes" -Method Get -Credential $Credential -ContentType 'application/json'
             
             Write-Information -MessageData $x

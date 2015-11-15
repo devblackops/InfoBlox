@@ -43,22 +43,22 @@ function Add-IBResourceRecordHost {
     .PARAMETER CreateInDNS
         Switch to indicate whether to create a DNS record as well. Default is FALSE.
     #>
-    [CmdletBinding()]
+    [cmdletbinding(SupportsShouldProcess = $true)]
     param(
         [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
-        [string]$IPv4Address,
+        [string]$IPv4Address = (Read-Host -Promp 'IP4 address'),
 
         [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
         [Alias('Name')]
-        [string]$HostName,
+        [string]$HostName = (Read-Host -Prompt 'Hostname'),
 
-        [string]$Comment,
-
-        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
-        [string]$GridServer,
+        [string]$Comment = [string]::Empty,
 
         [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
-        [pscredential]$Credential,
+        [string]$GridServer = (Read-Host -Prompt 'InfoBlox Grid server'),
+
+        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [pscredential]$Credential = (Get-Credential -Message 'InfoBlox credential'),
 
         [switch]$CreateInDNS
     )
@@ -66,7 +66,8 @@ function Add-IBResourceRecordHost {
     begin {}
 
     process {
-        $uri = "https://$GridServer/wapi/v$script:apiVersion/record:host"
+        $apiVersion = $script:apiVersion
+        $uri = "https://$GridServer/wapi/v$apiVersion/record:host"
 
         if ($PSBoundParameters.ContainsKey('CreateInDNS')) {
             $dns = $true
@@ -84,9 +85,10 @@ function Add-IBResourceRecordHost {
         }
         $json = $data | ConvertTo-Json
 
-        $request = Invoke-RestMethod -Uri $uri -Method Post -Body $json -ContentType 'application/json' -Credential $Credential
-
-        return $request
+        if ($PSCmdlet.ShouldProcess($Hostname, 'Add InfoBlox record host')) {
+            $request = Invoke-RestMethod -Uri $uri -Method Post -Body $json -ContentType 'application/json' -Credential $Credential
+            return $request
+        }
     }
 
     end {}

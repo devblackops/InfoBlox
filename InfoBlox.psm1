@@ -34,4 +34,4 @@ foreach ($internal in $internals) {
 # Allow untrusted SSL
 _SetCertPolicy
 
-Export-ModuleMember -Function *IB*
+#Export-ModuleMember -Function *IB*

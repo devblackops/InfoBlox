@@ -17,8 +17,10 @@ limitations under the License.
 function _CidrToBin {
     param(
         [parameter(Mandatory)]
-        [int]$cidr
+        [int]$cidr = (Read-Host -Prompt 'CIDR')
     )
+
+    $cidrBin = [string]::Empty
 
     if($cidr -le 32) {
         [int[]]$array = (1..32)
@@ -29,7 +31,7 @@ function _CidrToBin {
                 $array[$i] = '1'
             }
         }
-        [string]$cidrBin = $array -join ''
+        $cidrBin = $array -join ''
     }
     return $cidrBin
 }

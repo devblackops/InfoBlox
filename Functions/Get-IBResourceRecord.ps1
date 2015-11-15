@@ -53,28 +53,30 @@ function Get-IBResourceRecord {
     param(
         [Parameter(Mandatory)]
         [ValidateSet('A', 'AAAA','CName', 'DName', 'DNSKEY', 'DS', 'Host', 'LBDN', 'MX', 'NAPTR','NS', 'NSEC', 'NSEC3', 'NSEC3PARAM', 'PTR', 'RRSIG', 'SRV', 'TXT')]
-        [string]$Type,
+        [string]$Type = 'A',
 
         [string]$SearchField = 'name',
 
         [Parameter(Mandatory)]
-        [string]$SearchText,
+        [string]$SearchText = (Read-Host -Prompt 'Search text'),
 
-        [Parameter(Mandatory)]
-        [string]$GridServer,
+        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [string]$GridServer = (Read-Host -Prompt 'InfoBlox Grid server'),
 
-        [string[]]$Properties,
+        [string[]]$Properties = [string[]],
 
         [switch]$Passthrough,
 
-        [Parameter(Mandatory)]
-        [pscredential]$Credential
+        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [pscredential]$Credential = (Get-Credential -Message 'InfoBlox credential')
     )
 
-    begin {}
+    begin {
+        $apiVersion = $script:apiVersion
+    }
 
     process {
-        $uri = "https://$GridServer/wapi/v$script:apiVersion/record:$($Type.ToLower())?$($SearchField.ToLower())~:=$SearchText"
+        $uri = "https://$GridServer/wapi/v$apiVersion/record:$($Type.ToLower())?$($SearchField.ToLower())~:=$SearchText"
 
         if ($PSBoundParameters.ContainsKey('Properties')) {
             $uri = "$uri&_return_fields=$(($Properties -join "," -replace " ").ToLower())"
@@ -90,7 +92,7 @@ function Get-IBResourceRecord {
                 $returnObject | Add-Member -Type NoteProperty -Name GridServer -Value $GridServer
             }
 
-            Write-Output $returnObject
+            Write-Output -InputObject $returnObject
         }
     }
 
