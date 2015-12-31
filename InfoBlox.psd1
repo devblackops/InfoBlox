@@ -12,7 +12,7 @@
 RootModule = 'InfoBlox.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.1.1'
+ModuleVersion = '1.1.2'
 
 # ID used to uniquely identify this module
 GUID = '3eec71fe-128b-449b-ab77-df01910d2409'
