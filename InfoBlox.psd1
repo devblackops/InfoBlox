@@ -102,7 +102,7 @@ PrivateData = @{
         Tags = 'InfoBlox','IPAM'
 
         # A URL to the license for this module.
-        # LicenseUri = 'http://www.apache.org/licenses/LICENSE-2.0'
+        LicenseUri = 'http://www.apache.org/licenses/LICENSE-2.0'
 
         # A URL to the main website for this project.
         ProjectUri = 'https://github.com/devblackops/InfoBlox'
