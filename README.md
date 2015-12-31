@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/wxg7eyc0ygs9jeo8?svg=true)](https://ci.appveyor.com/project/devblackops/infoblox)
+
 # InfoBlox
 PowerShell module for interacting with InfoBlox IPAM via the REST API.
 
