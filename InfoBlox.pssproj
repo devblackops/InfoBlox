@@ -30,6 +30,7 @@
     <Folder Include="Functions\" />
     <Folder Include="Internal\" />
     <Folder Include="en-US\" />
+    <Folder Include="Tests\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include=".gitignore" />
@@ -48,8 +49,11 @@
     <Compile Include="Internal\_CidrToBin.ps1" />
     <Compile Include="Internal\_SetCertPolicy.ps1" />
     <Compile Include="LICENSE" />
+    <Compile Include="README.md" />
+    <Compile Include="Tests\AppVeyor.Pester.ps1" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="appveyor.yml" />
     <Content Include="en-US\about_InfoBlox.help.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
