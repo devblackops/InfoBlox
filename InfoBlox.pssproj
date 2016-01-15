@@ -27,34 +27,41 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Functions\" />
-    <Folder Include="Internal\" />
-    <Folder Include="en-US\" />
+    <Folder Include="InfoBlox\en-US\" />
+    <Folder Include="InfoBlox\Functions\" />
+    <Folder Include="InfoBlox\Internal\" />
+    <Folder Include="Media\" />
+    <Folder Include="InfoBlox\" />
     <Folder Include="Tests\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include=".gitignore" />
-    <Compile Include="Functions\Add-IBResourceRecordHost.ps1" />
-    <Compile Include="Functions\Get-IBNetwork.ps1" />
-    <Compile Include="Functions\Get-IBNextAvailableIP.ps1" />
-    <Compile Include="Functions\Get-IBResourceRecord.ps1" />
-    <Compile Include="Functions\New-IBNetwork.ps1" />
-    <Compile Include="Functions\New-IBNetworkContainer.ps1" />
-    <Compile Include="Functions\Remove-IBResourceRecord.ps1" />
-    <Compile Include="Functions\Request-IBAvailableIP.ps1" />
-    <Compile Include="Functions\Set-IBResourceRecord.ps1" />
-    <Compile Include="InfoBlox.psd1" />
-    <Compile Include="InfoBlox.psm1" />
-    <Compile Include="Internal\_BinToDec.ps1" />
-    <Compile Include="Internal\_CidrToBin.ps1" />
-    <Compile Include="Internal\_SetCertPolicy.ps1" />
+    <Compile Include="InfoBlox\Functions\Add-IBResourceRecordHost.ps1" />
+    <Compile Include="InfoBlox\Functions\Get-IBNetwork.ps1" />
+    <Compile Include="InfoBlox\Functions\Get-IBNextAvailableIP.ps1" />
+    <Compile Include="InfoBlox\Functions\Get-IBResourceRecord.ps1" />
+    <Compile Include="InfoBlox\Functions\New-IBNetwork.ps1" />
+    <Compile Include="InfoBlox\Functions\New-IBNetworkContainer.ps1" />
+    <Compile Include="InfoBlox\Functions\Remove-IBResourceRecord.ps1" />
+    <Compile Include="InfoBlox\Functions\Request-IBAvailableIP.ps1" />
+    <Compile Include="InfoBlox\Functions\Set-IBResourceRecord.ps1" />
+    <Compile Include="InfoBlox\InfoBlox.psd1" />
+    <Compile Include="InfoBlox\InfoBlox.psm1" />
+    <Compile Include="InfoBlox\Internal\_BinToDec.ps1" />
+    <Compile Include="InfoBlox\Internal\_CidrToBin.ps1" />
+    <Compile Include="InfoBlox\Internal\_SetCertPolicy.ps1" />
     <Compile Include="LICENSE" />
     <Compile Include="README.md" />
     <Compile Include="Tests\AppVeyor.Pester.ps1" />
+    <Compile Include="Tests\Manifest.Tests.ps1" />
+    <Compile Include="Tests\Meta.Tests.ps1" />
+    <Compile Include="Tests\MetaFixers.psm1" />
+    <Compile Include="Tests\TestHelper.psm1" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="appveyor.yml" />
-    <Content Include="en-US\about_InfoBlox.help.txt" />
+    <Content Include="CONTRIBUTING.md" />
+    <Content Include="InfoBlox\en-US\about_InfoBlox.help.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="Build" />
