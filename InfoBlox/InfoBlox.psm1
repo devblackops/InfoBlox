@@ -22,7 +22,7 @@ Set-StrictMode -Version 3
 # Load public functions
 $functions = Get-ChildItem -Path "$PSScriptRoot\Functions" -Recurse -Include *.ps1
 foreach ($function in $functions) {
-	. $function.FullName
+    . $function.FullName
 }
 
 # Load internal functions
