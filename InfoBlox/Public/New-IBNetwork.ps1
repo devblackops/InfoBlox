@@ -36,6 +36,9 @@ function New-IBNetwork {
 
     .PARAMETER Comment
         The description/comment to add
+
+    .PARAMETER WhatIf
+        Do not create network, just show -WhatIf message.
     #>    
     [cmdletbinding(SupportsShouldProcess = $true)]
     param(

@@ -42,6 +42,9 @@ function Request-IBAvailableIP {
 
     .PARAMETER ConfigureForDNS
         Switch to indicate whether to create a DNS record as well. Default is FALSE.
+
+    .PARAMETER WhatIf
+        Do not request IP address, just show -WhatIf message.
     #>
     [cmdletbinding(SupportsShouldProcess = $true)]
     param(

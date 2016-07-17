@@ -42,6 +42,9 @@ function Add-IBResourceRecordHost {
 
     .PARAMETER CreateInDNS
         Switch to indicate whether to create a DNS record as well. Default is FALSE.
+
+    .PARAMETER WhatIf
+        Do not create resource record, just show -WhatIf message.
     #>
     [cmdletbinding(SupportsShouldProcess = $true)]
     param(

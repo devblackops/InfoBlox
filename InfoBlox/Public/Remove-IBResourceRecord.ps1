@@ -33,6 +33,9 @@ function Remove-IBResourceRecord {
 
     .PARAMETER Credential
         The credential to authenticate to the grid server with.
+
+    .PARAMETER WhatIf
+        Do not remove address record, just show -WhatIf message.
     #>
     [cmdletbinding(SupportsShouldProcess = $true)]
     param(
