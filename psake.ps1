@@ -11,7 +11,7 @@ properties {
     $psVersion = $PSVersionTable.PSVersion.Major
 }
 
-task default -depends Init, Analyze
+task default -depends Analyze, Pester
 
 task Init {
     "`nSTATUS: Testing with PowerShell $psVersion"
