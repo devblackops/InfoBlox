@@ -11,7 +11,7 @@ properties {
     $psVersion = $PSVersionTable.PSVersion.Major
 }
 
-task default -depends Analyze, Pester
+task default -depends Deploy
 
 task Init {
     "`nSTATUS: Testing with PowerShell $psVersion"
@@ -58,7 +58,7 @@ task ExportFunctions {
     Update-ModuleManifest -Path $manifest -FunctionsToExport $functions
 }
 
-task Deploy -depends Test, GenerateHelp {
+task Deploy -depends Test {
     # Gate deployment
     if(
         $ENV:BHBuildSystem -ne 'Unknown' -and
