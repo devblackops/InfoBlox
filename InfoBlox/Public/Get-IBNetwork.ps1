@@ -14,32 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 #>
 
-function Get-IBNetwork {
-    <#
-    .SYNOPSIS
-        Retrieves networks from an Infoblox Gridserver
-
-    .DESCRIPTION
-        Specify an attribute to search for, for example hostname and retrieve the object from the Gridserver
-
-    .EXAMPLE
-        Get-IBNetwork -GridServer myinfoblox.mydomain.com -Credential $Credential -Network '1.2.3.0/24'
-
-        Retrieve the network called 1.2.3.0/24    
-
-    .PARAMETER GridServer
-        The name of the infoblox appliance.
-
-    .PARAMETER Credential
-        The credential to authenticate to the grid server with.
-
-    .PARAMETER Network
-        The network name to get.
-
-    .PARAMETER Properties
-        Additional properties to retrieve with the network object.
-    #>
-    
+function Get-IBNetwork {   
     [OutputType([system.object[]])]
     [cmdletbinding()]
     param(

@@ -15,42 +15,6 @@ limitations under the License.
 #>
 
 function Add-IBResourceRecordHost {
-    <#
-    .SYNOPSIS
-        Add a host record on the Infoblox Gridserver
-
-    .DESCRIPTION
-        This cmdlet creates a host object on the Infoblox Gridserver.
-
-    .EXAMPLE
-        Add-IBResourceRecordHost -IPv4Address '1.2.3.4' -HostName 'myserver.mydomain.com' -GridServer myinfoblox.mydomain.com -Credential $Credential
-
-        Create new IP record with address 1.2.3.4 and host name myserver.mydomain.com
-
-    .PARAMETER IPv4Address
-        The IPv4 address for the host record. Allows pipeline input.
-
-    .PARAMETER HostName
-        The hostname for the host record. Allows pipeline input.
-
-    .PARAMETER Comment
-        The comment text for the host record.
-
-    .PARAMETER GridServer
-        The name of the infoblox appliance. Allows pipeline input.
-
-    .PARAMETER Credential
-        The credential to authenticate to the grid server with.
-
-    .PARAMETER CreateInDNS
-        Switch to indicate whether to create a DNS record as well. Default is FALSE.
-
-    .PARAMETER WhatIf
-        Do not create resource record, just show -WhatIf message.
-        
-    .PARAMETER Confirm
-        Confirm action before executing.
-    #>
     [cmdletbinding(SupportsShouldProcess = $true)]
     param(
         [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]

@@ -15,36 +15,6 @@ limitations under the License.
 #>
 
 function New-IBNetworkContainer {
-    <#
-    .SYNOPSIS
-        Adds a network container to an Infoblox Gridserver
-
-    .DESCRIPTION
-        Adds a network container to an Infoblox Gridserver
-
-    .EXAMPLE
-        New-IBNetworkContainer -GridServer myinfoblox.mydomain.com -Credential $Credential -Network '10.10.1.0/24' -Comment 'My New Network'
-
-        Create a network container called 10.10.1.0/24
-
-    .PARAMETER GridServer
-        The name of the infoblox appliance.
-
-    .PARAMETER Credential
-        The credential to authenticate to the grid server with.
-
-    .PARAMETER Network
-        The network to create
-
-    .PARAMETER Comment
-        The description/comment to add
-
-    .PARAMETER WhatIf
-        Do not create network container, just show -WhatIf message.
-
-    .PARAMETER Confirm
-        Confirm action before executing.
-    #>
     [cmdletbinding(SupportsShouldProcess = $true)]
     param(
         [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]

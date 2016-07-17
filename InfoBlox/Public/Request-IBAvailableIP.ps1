@@ -15,42 +15,6 @@ limitations under the License.
 #>
 
 function Request-IBAvailableIP {
-    <#
-    .SYNOPSIS
-        Reservers an available IP from a Infoblox Gridserver
-
-    .DESCRIPTION
-        Specify an attribute to search for, for example hostname and retrieve the object from the Gridserver
-
-    .EXAMPLE
-        Request-IBAvailableIP -GridServer myinfoblox.mydomain.com -Credential $Credential -Network '1.2.3.0/24' -Name 'server01' -Comment 'test server'
-
-        Allocate an IP address from network 1.2.3.0/24 and give it a host name of server01.
-
-    .PARAMETER GridServer
-        The name of the infoblox appliance.
-
-    .PARAMETER Credential
-        The credential to authenticate to the grid server with.
-
-    .PARAMETER Network
-        The network to request an IP from.
-
-    .PARAMETER Name
-        The hostname for the host record.
-
-    .PARAMETER Comment
-        The comment text for the host record.
-
-    .PARAMETER ConfigureForDNS
-        Switch to indicate whether to create a DNS record as well. Default is FALSE.
-
-    .PARAMETER WhatIf
-        Do not request IP address, just show -WhatIf message.
-
-    .PARAMETER Confirm
-        Confirm action before executing.
-    #>
     [cmdletbinding(SupportsShouldProcess = $true)]
     param(
         [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]

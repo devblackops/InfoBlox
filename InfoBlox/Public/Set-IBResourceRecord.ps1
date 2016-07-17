@@ -15,39 +15,6 @@ limitations under the License.
 #>
 
 function Set-IBResourceRecord {
-    <#
-    .SYNOPSIS
-        Changes a host record on an Infoblox Gridserver
-
-    .DESCRIPTION
-        This cmdlet changes a host object on an Infoblox Gridserver.
-
-    .EXAMPLE
-        Set-IBResourceRecord -Reference Reference -IPv4Address '1.2.3.4' -HostName myhost.mydomain.com -GridServer myinfoblox.mydomain.com -Credential $Credential
-
-        Modify resource record
-
-    .PARAMETER Reference
-        The object reference for the host record. Allows pipeline input.
-
-    .PARAMETER IPv4Address
-        The new IPv4 address for the host record.
-
-    .PARAMETER HostName
-        The new HostName for the host record.
-
-    .PARAMETER GridServer
-        The name of the infoblox appliance. Allows pipeline input.
-
-    .PARAMETER Credential
-        The credential to authenticate to the grid server with.
-
-    .PARAMETER WhatIf
-        Do not update record, just show -WhatIf message.
-        
-    .PARAMETER Confirm
-        Confirm action before executing.
-    #>
     [cmdletbinding(SupportsShouldProcess = $true)]
     param(
         [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]

@@ -15,44 +15,6 @@ limitations under the License.
 #>
 
 function Get-IBResourceRecord {
-    <#
-    .SYNOPSIS
-        Retrieves resource records from an Infoblox Gridserver
-
-    .DESCRIPTION
-        Specify an attribute to search for, for example hostname and retrieve the object from the Gridserver
-
-    .EXAMPLE
-        Get-IBResourceRecord -Type host -SearchField MyServer -GridServer myinfoblox.mydomain.com -Credential $Credential
-
-        Retrieve the host record object with name MyServer
-
-    .EXAMPLE
-        Get-IBResourceRecord -Type network -SearchField 1.0.0.0/8 -GridServer myinfoblox.mydomain.com -Credential $Credential -Passthrough
-
-        Retrieve the network object with name 1.0.0.0/8
-
-    .PARAMETER Type
-        Specify the type of record, for example host or network.
-
-    .PARAMETER SearchField
-        The field where the RecordValue is. Default is "Name".
-
-    .PARAMETER SearchText
-        The value to search for.
-
-    .PARAMETER GridServer
-        The name of the infoblox appliance.
-
-    .PARAMETER Properties
-        What properties should be included?
-
-    .PARAMETER Credential
-        The credential to authenticate to the grid server with.
-
-    .PARAMETER Passthrough
-        Includes credentials and gridserver in the object sent down the pipeline so you don't need to add them in the next cmdlet.
-    #>
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)]

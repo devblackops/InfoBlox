@@ -15,33 +15,6 @@ limitations under the License.
 #>
 
 function Remove-IBResourceRecord {
-    <#
-    .SYNOPSIS
-        Removes a host record from an Infoblox Gridserver
-
-    .DESCRIPTION
-        This cmdlet removes a host object from an Infoblox Gridserver.
-
-    .EXAMPLE
-        Remove-IBResourceRecord -Reference $ref -GridServer myinfoblox.mydomain.com -Credential $Credential
-
-        Remove a resource record
-
-    .PARAMETER Reference
-        The object reference for the host record. Allows pipeline input.
-
-    .PARAMETER GridServer
-        The name of the infoblox appliance. Allows pipeline input.
-
-    .PARAMETER Credential
-        The credential to authenticate to the grid server with.
-
-    .PARAMETER WhatIf
-        Do not remove address record, just show -WhatIf message.
-
-    .PARAMETER Confirm
-        Confirm action before executing.
-    #>
     [cmdletbinding(SupportsShouldProcess = $true)]
     param(
         [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
