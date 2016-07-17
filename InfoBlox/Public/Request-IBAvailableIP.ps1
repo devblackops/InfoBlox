@@ -45,6 +45,9 @@ function Request-IBAvailableIP {
 
     .PARAMETER WhatIf
         Do not request IP address, just show -WhatIf message.
+
+    .PARAMETER Confirm
+        Confirm action before executing.
     #>
     [cmdletbinding(SupportsShouldProcess = $true)]
     param(

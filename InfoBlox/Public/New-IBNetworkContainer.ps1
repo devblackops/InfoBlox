@@ -39,6 +39,9 @@ function New-IBNetworkContainer {
 
     .PARAMETER WhatIf
         Do not create network container, just show -WhatIf message.
+
+    .PARAMETER Confirm
+        Confirm action before executing.
     #>
     [cmdletbinding(SupportsShouldProcess = $true)]
     param(

@@ -45,6 +45,9 @@ function Add-IBResourceRecordHost {
 
     .PARAMETER WhatIf
         Do not create resource record, just show -WhatIf message.
+        
+    .PARAMETER Confirm
+        Confirm action before executing.
     #>
     [cmdletbinding(SupportsShouldProcess = $true)]
     param(

@@ -45,6 +45,9 @@ function Set-IBResourceRecord {
 
     .PARAMETER WhatIf
         Do not update record, just show -WhatIf message.
+        
+    .PARAMETER Confirm
+        Confirm action before executing.
     #>
     [cmdletbinding(SupportsShouldProcess = $true)]
     param(
