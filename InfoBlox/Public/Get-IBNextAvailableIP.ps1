@@ -25,8 +25,12 @@ function Get-IBNextAvailableIP {
     .EXAMPLE
         Get-IBNextAvailableIP -GridServer myinfoblox.mydomain.com -Credential $Credential -NetworkRef $ref
 
+        Retrieve the next available IP address on network contained in $ref
+
     .EXAMPLE
         Get-IBNextAvailableIP -GridServer myinfoblox.mydomain.com -Credential $Credential -NetworkRef $ref -Quantity 10
+
+        Retrieve the next 10 available IP address on network contained in $ref
 
     .PARAMETER GridServer
         The name of the infoblox appliance.

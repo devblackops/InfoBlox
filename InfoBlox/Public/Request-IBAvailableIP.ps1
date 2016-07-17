@@ -25,6 +25,8 @@ function Request-IBAvailableIP {
     .EXAMPLE
         Request-IBAvailableIP -GridServer myinfoblox.mydomain.com -Credential $Credential -Network '1.2.3.0/24' -Name 'server01' -Comment 'test server'
 
+        Allocate an IP address from network 1.2.3.0/24 and give it a host name of server01.
+
     .PARAMETER GridServer
         The name of the infoblox appliance.
 

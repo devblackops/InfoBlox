@@ -25,8 +25,12 @@ function Get-IBResourceRecord {
     .EXAMPLE
         Get-IBResourceRecord -Type host -SearchField MyServer -GridServer myinfoblox.mydomain.com -Credential $Credential
 
+        Retrieve the host record object with name MyServer
+
     .EXAMPLE
         Get-IBResourceRecord -Type network -SearchField 1.0.0.0/8 -GridServer myinfoblox.mydomain.com -Credential $Credential -Passthrough
+
+        Retrieve the network object with name 1.0.0.0/8
 
     .PARAMETER Type
         Specify the type of record, for example host or network.

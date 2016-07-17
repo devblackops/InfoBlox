@@ -25,6 +25,8 @@ function New-IBNetworkContainer {
     .EXAMPLE
         New-IBNetworkContainer -GridServer myinfoblox.mydomain.com -Credential $Credential -Network '10.10.1.0/24' -Comment 'My New Network'
 
+        Create a network container called 10.10.1.0/24
+
     .PARAMETER GridServer
         The name of the infoblox appliance.
 

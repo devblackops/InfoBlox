@@ -25,6 +25,8 @@ function Add-IBResourceRecordHost {
     .EXAMPLE
         Add-IBResourceRecordHost -IPv4Address '1.2.3.4' -HostName 'myserver.mydomain.com' -GridServer myinfoblox.mydomain.com -Credential $Credential
 
+        Create new IP record with address 1.2.3.4 and host name myserver.mydomain.com
+
     .PARAMETER IPv4Address
         The IPv4 address for the host record. Allows pipeline input.
 

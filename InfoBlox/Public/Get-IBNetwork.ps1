@@ -23,7 +23,9 @@ function Get-IBNetwork {
         Specify an attribute to search for, for example hostname and retrieve the object from the Gridserver
 
     .EXAMPLE
-        Get-IBNetwork -GridServer myinfoblox.mydomain.com -Credential $Credential -Network '1.2.3.0/24'    
+        Get-IBNetwork -GridServer myinfoblox.mydomain.com -Credential $Credential -Network '1.2.3.0/24'
+
+        Retrieve the network called 1.2.3.0/24    
 
     .PARAMETER GridServer
         The name of the infoblox appliance.

@@ -25,8 +25,7 @@ function Set-IBResourceRecord {
     .EXAMPLE
         Set-IBResourceRecord -Reference Reference -IPv4Address '1.2.3.4' -HostName myhost.mydomain.com -GridServer myinfoblox.mydomain.com -Credential $Credential
 
-    .EXAMPLE
-        Get-IBResourceRecord -Type host -SeachText 'MyHost' -GridServer 'myinfoblox.mydomain.com' -Credential $Credential -Passthrough | Set-IBResourceRecord -IPv4Address '2.3.4.5'
+        Modify resource record
 
     .PARAMETER Reference
         The object reference for the host record. Allows pipeline input.

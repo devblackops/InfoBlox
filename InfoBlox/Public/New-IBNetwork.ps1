@@ -25,6 +25,8 @@ function New-IBNetwork {
     .EXAMPLE
         New-IBNetwork -GridServer myinfoblox.mydomain.com -Credential $Credential -Network '10.10.1.0/24' -Comment 'My New Network'
 
+        Create a new network called 10.10.1.0/24
+
     .PARAMETER GridServer
         The name of the infoblox appliance.
 

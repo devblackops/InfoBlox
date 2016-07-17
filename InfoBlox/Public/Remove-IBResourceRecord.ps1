@@ -25,6 +25,8 @@ function Remove-IBResourceRecord {
     .EXAMPLE
         Remove-IBResourceRecord -Reference $ref -GridServer myinfoblox.mydomain.com -Credential $Credential
 
+        Remove a resource record
+
     .PARAMETER Reference
         The object reference for the host record. Allows pipeline input.
 
