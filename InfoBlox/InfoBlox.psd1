@@ -66,7 +66,7 @@ FormatsToProcess = @()
 FunctionsToExport = @(
     'Add-IBResourceRecordHost',
     'Get-IBNetwork',
-    'Get-IBNetworkAvailableIP', 
+    'Get-IBNextAvailableIP', 
     'Get-IBResourceRecord',
     'New-IBNetwork',
     'New-IBNetworkContainer',
@@ -99,10 +99,10 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = 'InfoBlox','IPAM'
+        Tags = 'InfoBlox','IPAM', 'IP', 'Address', 'Management'
 
         # A URL to the license for this module.
-        LicenseUri = 'http://www.apache.org/licenses/LICENSE-2.0'
+        LicenseUri = 'https://github.com/devblackops/InfoBlox/blob/master/LICENSE'
 
         # A URL to the main website for this project.
         ProjectUri = 'https://github.com/devblackops/InfoBlox'
